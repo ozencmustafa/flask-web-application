@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>Login</h3>
+<hr>
+<!--formhelpers.html dahil etmemiz gerekiyor ki render_fieldi alabilelim. -->
+{% from "includes/formhelpers.html" import render_field %}
+
+<form method="post">
+
+    {{ render_field(form.username)}}
+    {{ render_field(form.password)}}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+{% endblock body %}
