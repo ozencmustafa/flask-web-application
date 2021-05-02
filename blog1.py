@@ -1,3 +1,4 @@
+# Flask sinifi web sunucumuzu ayaga kaldirir.
 from flask import Flask,render_template,flash,redirect,url_for,logging,request,session
 from flask_mysqldb import MySQL
 from wtforms import Form,StringField,TextAreaField,PasswordField,validators
@@ -29,7 +30,7 @@ class RegisterForm(Form):
 class LoginForm(Form): # WT Form dan inherit ediyoruz.
     username =StringField("User Name")
     password = PasswordField("Password")
-
+####1. once app adinda Flask sinifindan bir obje olusturduk
 app = Flask(__name__)       # ozel bir degisken, terminalden calistirilirsa name degeri main oluyor.
 app.secret_key = "myblog"
 app.config["MYSQL_HOST"] = "localhost"
@@ -39,10 +40,10 @@ app.config["MYSQL_DB"] = "myblog"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)
-
-@app.route("/")
+####3 Request yapip HTML olarak response donuyoruz
+@app.route("/")   #decoreter (request yapiyorus)
 def index():
-    return render_template("index.html")
+    return render_template("index.html")  # response donuyoruz
 
 @app.route("/about")
 def about():
@@ -117,6 +118,6 @@ def logout():
     session.clear()
     return redirect(url_for("index"))
 
-
+####2 Bilgisayarimda localhostu yani web sunususunu calistirmam gerekiyor
 if __name__ == "__main__":  # terminalden mi calismis yoksa baska bir python code tan mi  cagrilmis 
-    app.run(debug=True)
+    app.run(debug=True) # hatamisi gormek icin
