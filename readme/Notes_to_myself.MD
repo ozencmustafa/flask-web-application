@@ -1,4 +1,5 @@
 #### Render html template
+---
 Bu projede html sayfasini render ettik. Render edilecek html sayfasi template directory \
 altinda durur. render_template library kullandik ve homepage icin fonksiyon html \
 sayfasini return etti. 
