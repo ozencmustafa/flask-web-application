@@ -10,5 +10,5 @@ def hello_world():
 
 
 #Below lines are hashed becasue, application runs as a service on EC2 Instance, gunicorn is used.
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
