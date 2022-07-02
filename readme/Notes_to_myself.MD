@@ -1,8 +1,9 @@
-This flask app runs as a service.
+This flask app can be run as a service with gunicorn but also you can run it also as a docker image.
 
+## As a service:
 ```
 ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$ systemctl status flaskapp
-‚óè flaskapp.service - Gunicorn service
+‚ flaskapp.service - Gunicorn service
      Loaded: loaded (/etc/systemd/system/flaskapp.service; static; vendor preset: enabled)
      Active: active (running) since Sat 2022-07-02 20:30:26 UTC; 1h 39min ago
    Main PID: 463 (gunicorn3)
@@ -23,7 +24,51 @@ Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[493]: [2022-07-02 20:30:27 +0000] [493
 Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[495]: [2022-07-02 20:30:27 +0000] [495] [INFO] Booting worker with pid: 495
 ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$
 ```
+## Docker Image
+To dockerize and automatize your deployment you have to create a Dockerfile.
+Assume these commands are needed to deploy your application on an ubuntu server.
+You can create your docker file as below.
+```
+#~/devops_site$# cat Dockerfile
+FROM ubuntu
 
+RUN apt-get update
+RUN apt-get install -y python
+RUN apt-get install -y pip pip
+RUN pip install flask
+
+RUN git clone https://github.com/ozencmustafa/flask-web-application.git
+RUN cp -r flask-web-application /opt/
+
+ENTRYPOINT FLASK_APP=/opt/flask-web-application/app.py flask run --host=0.0.0.0
+```
+
+Then we run  build command to create the docker image.
+```
+sudo docker build .
+```
+As it is already builted, I run the command again with -t tag to give a name.  It will not rebuilt it as it is cached.
+
+```
+sudo docker build . -t my_devops_site
+```
+
+You can check your images
+
+```
+# sudo docker images
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+my_devops_site   latest    943ef50c0c55   18 minutes ago   498MB
+<none>           <none>    11c1d42b19a3   20 minutes ago   465MB
+ubuntu           latest    27941809078c   3 weeks ago      77.8MB
+```
+
+You can run the image as below so that you can access it with the real IP of the Docker host.
+```
+sudo docker run -p 5000:5000 my_devops_site
+```
+
+http:<realIP>:5000
 
 
 
