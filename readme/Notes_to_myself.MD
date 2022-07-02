@@ -67,11 +67,8 @@ You can run the image as below so that you can access it with the real IP of the
 ```
 sudo docker run -p 5000:5000 my_devops_site
 ```
-
-http:<realIP>:5000
-
-
-
+## Test
+http:realIP:5000
 
 #### Render html template
 ---
