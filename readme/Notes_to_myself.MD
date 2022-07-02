@@ -1,3 +1,33 @@
+This flask app runs as a service.
+
+```
+ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$ systemctl status flaskapp
+● flaskapp.service - Gunicorn service
+     Loaded: loaded (/etc/systemd/system/flaskapp.service; static; vendor preset: enabled)
+     Active: active (running) since Sat 2022-07-02 20:30:26 UTC; 1h 39min ago
+   Main PID: 463 (gunicorn3)
+      Tasks: 4 (limit: 1145)
+     Memory: 62.1M
+     CGroup: /system.slice/flaskapp.service
+             ├─463 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
+             ├─492 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
+             ├─493 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
+             └─495 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
+
+Jul 02 20:30:26 ip-172-31-7-154 systemd[1]: Started Gunicorn service.
+Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[463]: [2022-07-02 20:30:27 +0000] [463] [INFO] Starting gunicorn 20.0.4
+Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[463]: [2022-07-02 20:30:27 +0000] [463] [INFO] Listening at: unix:flaskapp.sock (463)
+Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[463]: [2022-07-02 20:30:27 +0000] [463] [INFO] Using worker: sync
+Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[492]: [2022-07-02 20:30:27 +0000] [492] [INFO] Booting worker with pid: 492
+Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[493]: [2022-07-02 20:30:27 +0000] [493] [INFO] Booting worker with pid: 493
+Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[495]: [2022-07-02 20:30:27 +0000] [495] [INFO] Booting worker with pid: 495
+ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$
+```
+
+
+
+
+
 #### Render html template
 ---
 Bu projede html sayfasini render ettik. Render edilecek html sayfasi template directory \
