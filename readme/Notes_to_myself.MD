@@ -24,9 +24,16 @@ Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[493]: [2022-07-02 20:30:27 +0000] [493
 Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[495]: [2022-07-02 20:30:27 +0000] [495] [INFO] Booting worker with pid: 495
 ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$
 ```
+
 ## Docker Image
+You can pull the image as:
+```
+docker pull ozenc499/my_devops_site:latest
+```
+### How to dockerize
 To dockerize and automatize your deployment you have to create a Dockerfile.
 Assume these commands are needed to deploy your application on an ubuntu server.
+
 You can create your docker file as below.
 ```
 #~/devops_site$# cat Dockerfile
@@ -47,14 +54,13 @@ Then we run  build command to create the docker image.
 ```
 sudo docker build .
 ```
-As it is already builted, I run the command again with -t tag to give a name.  It will not rebuilt it as it is cached.
 
+As it is already builted, I run the command again with -t tag to give a name.  It will not rebuilt it as it is cached.
 ```
 sudo docker build . -t my_devops_site
 ```
 
 You can check your images
-
 ```
 # sudo docker images
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
@@ -70,6 +76,7 @@ sudo docker run -p 5000:5000 my_devops_site
 ## Test
 http:realIP:5000
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #### Render html template
 ---
 Bu projede html sayfasini render ettik. Render edilecek html sayfasi template directory \
