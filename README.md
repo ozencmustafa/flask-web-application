@@ -80,10 +80,8 @@ You can run the image as below so that you can access it with the real IP of the
 ```
 sudo docker run -p 5000:5000 my_devops_site
 ```
-## Test
-http:realIP:5000
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+### Notes to myself
 #### Render html template
 ---
 Bu projede html sayfasini render ettik. Render edilecek html sayfasi template directory \
