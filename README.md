@@ -1,9 +1,9 @@
 ### Platform
 
-Website run on EC2 instance. 
-Ubuntu 22.04 TLS 
-Type: t2.micro
-Web url: http://3.123.16.242/ 
+Website run on EC2 instance. \
+Ubuntu 22.04 TLS \
+Type: t2.micro \
+Web url: http://3.123.16.242/  \
 GitHub: https://github.com/ozencmustafa/flask-web-application.git 
 
 At the moment gunicorn runs in the background but wil be run as a service
