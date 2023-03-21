@@ -1,7 +1,10 @@
 ### Platform
-website run on EC2 instance. 
+
+Website run on EC2 instance. 
 Ubuntu 22.04 TLS 
-type: t2.micro
+Type: t2.micro
+Web url: http://3.123.16.242/ 
+GitHub: https://github.com/ozencmustafa/flask-web-application.git 
 
 At the moment gunicorn runs in the background but wil be run as a service
 
@@ -13,7 +16,7 @@ sudo pip3 install flask
 sudo apt-get install nginx
 sudo apt-get install gunicorn3
 
-git clone remote_repo
+git clone https://github.com/ozencmustafa/flask-web-application.git 
 ```
 
 ### Configure nginx
