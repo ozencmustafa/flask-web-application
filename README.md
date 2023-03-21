@@ -1,35 +1,42 @@
-This flask app can be run as a service with gunicorn but also you can run it also as a docker image.
+### Platform
+website run on EC2 instance. 
+Ubuntu 22.04 TLS 
+type: t2.micro
 
-## As a service:
+At the moment gunicorn runs in the background but wil be run as a service
+
 ```
-ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$ systemctl status flaskapp
-� flaskapp.service - Gunicorn service
-     Loaded: loaded (/etc/systemd/system/flaskapp.service; static; vendor preset: enabled)
-     Active: active (running) since Sat 2022-07-02 20:30:26 UTC; 1h 39min ago
-   Main PID: 463 (gunicorn3)
-      Tasks: 4 (limit: 1145)
-     Memory: 62.1M
-     CGroup: /system.slice/flaskapp.service
-             ├─463 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
-             ├─492 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
-             ├─493 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
-             └─495 /usr/bin/python3 /usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
+sudo apt-get update
+sudo apt-get install python3
+sudo apt-get install python3-pip
+sudo pip3 install flask
+sudo apt-get install nginx
+sudo apt-get install gunicorn3
 
-Jul 02 20:30:26 ip-172-31-7-154 systemd[1]: Started Gunicorn service.
-Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[463]: [2022-07-02 20:30:27 +0000] [463] [INFO] Starting gunicorn 20.0.4
-Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[463]: [2022-07-02 20:30:27 +0000] [463] [INFO] Listening at: unix:flaskapp.sock (463)
-Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[463]: [2022-07-02 20:30:27 +0000] [463] [INFO] Using worker: sync
-Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[492]: [2022-07-02 20:30:27 +0000] [492] [INFO] Booting worker with pid: 492
-Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[493]: [2022-07-02 20:30:27 +0000] [493] [INFO] Booting worker with pid: 493
-Jul 02 20:30:27 ip-172-31-7-154 gunicorn3[495]: [2022-07-02 20:30:27 +0000] [495] [INFO] Booting worker with pid: 495
-ubuntu@ip-172-31-7-154:/etc/nginx/sites-enabled$
+git clone remote_repo
 ```
 
-## Docker Image
+### Configure nginx
+```
+cd /etc/nginx/sites_enabled
+sudo vi flaskapp 
+sudo systemctl daemon-reload
+sudo service nginx restart
+```
+
+### Run gunicorn3
+```
+cd ~/flask_web_apllication
+gunicorn3 app:app --daemon
+```
+
+Image is also dockerized.
+### Docker Image
 You can pull the image as:
 ```
 docker pull ozenc499/my_devops_site:latest
 ```
+
 ### How to dockerize
 To dockerize and automatize your deployment you have to create a Dockerfile.
 Assume these commands are needed to deploy your application on an ubuntu server.
